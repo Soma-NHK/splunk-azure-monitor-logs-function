@@ -1,0 +1,28 @@
+{
+  "scriptFile": "../dist/azure_monitor_logs_processor_func/index.js",
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "events",
+      "direction": "in",
+      "eventHubName": "%EventHubName%",
+      "connection": "EventHubConnection",
+      "cardinality": "many",
+      "consumerGroup": "%ConsumerGroupName%"
+    },
+    {
+      "name": "failedParseEventsOutputBlob",
+      "type": "blob",
+      "path": "splunk-failed-%EventHubName%/{DateTime:yyyy}/{DateTime:MM}/{DateTime:dd}/{DateTime:hh}/splunk-%EventHubName%-%Region%-failed-to-parse-{DateTime:yyyy}-{DateTime:MM}-{DateTime:dd}-{DateTime:hh}-{rand-guid}.log",
+      "connection": "FailedEventsStorageConnection",
+      "direction": "out"
+    },
+    {
+      "name": "failedSendEventsOutputBlob",
+      "type": "blob",
+      "path": "splunk-failed-%EventHubName%/{DateTime:yyyy}/{DateTime:MM}/{DateTime:dd}/{DateTime:hh}/splunk-%EventHubName%-%Region%-failed-to-send-{DateTime:yyyy}-{DateTime:MM}-{DateTime:dd}-{DateTime:hh}-{rand-guid}.log",
+      "connection": "FailedEventsStorageConnection",
+      "direction": "out"
+    }
+  ]
+}
