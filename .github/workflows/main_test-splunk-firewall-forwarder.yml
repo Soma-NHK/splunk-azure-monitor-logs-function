@@ -82,4 +82,7 @@ jobs:
           app-name: 'test-splunk-firewall-forwarder'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          sku: 'flexconsumption'
+          remote-build: 'true'
+
           
